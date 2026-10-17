@@ -1,0 +1,13 @@
+import functools
+
+class Solution:
+    """
+    
+    dfs(l, r, alice) = alice
+
+    recursion relation
+    max(dfs(l + 1, r, not alice) + piles[l], dfs(l, r - 1, not alice) + piles[r])
+    
+    """
+    def stoneGame(self, piles: List[int]) -> bool:
+        return True
