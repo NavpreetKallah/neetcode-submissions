@@ -1,0 +1,43 @@
+class Solution:
+    """
+    sorted
+    -3, 0, 1, 2, 3, 3
+
+    
+    
+    """
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        nums.sort()
+        res, partial = [], []
+        n = len(nums)
+
+        def kSum(k, start, target):
+            if k == 2:
+                l, r = start, n - 1
+                while l < r:
+                    if nums[l] + nums[r] > target:
+                        r -= 1
+                    elif nums[l] + nums[r] < target:
+                        l += 1
+                    else:
+                        res.append(partial + [nums[l], nums[r]])
+                        l += 1
+                        r -= 1
+
+                        while l < r and nums[l] == nums[l - 1]:
+                            l += 1
+                        while l < r and nums[r] == nums[r + 1]:
+                            r -= 1
+
+                return
+            
+            for i in range(start, n - k + 1):
+                if i > start and nums[i] == nums[i - 1]:
+                    continue
+
+                partial.append(nums[i])
+                kSum(k - 1, i + 1, target - nums[i])
+                partial.pop()
+        
+        kSum(4, 0, target)
+        return res
